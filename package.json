@@ -1,7 +1,7 @@
 {
-  "name": "autodeskApp",
+  "name": "GettApp",
   "version": "1.0.0",
-  "description": "Health check",
+  "description": "message delivery system",
   "main": "server.js",
   "dependencies": {
     "assert": "^1.4.1",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/linoyzaga/autodesk-app.git"
+    "url": "https://github.com/linoyzaga/gett-app.git"
   },
   "devDependencies": {
     "expect": "^22.4.3",
