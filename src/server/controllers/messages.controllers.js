@@ -1,20 +1,13 @@
-const mongoose = require('mongoose');
-const express = require('express');
-const Comment = require('../data/db.js').Comment;
-const User = require('../data/db.js').User;
+const clients = require('../data/storage').clients;
 
-function handleError(res, err) {
-    console.log(err);
-
-    return res.send(500, { error: 'Ops, something went wrong!' });
-}
-
-module.exports.getComments = function getComments(req, res) {
-
+module.exports.addClient = function addClient(client) {
+    clients.push(client);
 };
 
-module.exports.postComment = function postComment(req, res) {
-
-
-    res.send(200);
+module.exports.sendMessage = function sendMessage(ws, data) {
+    clients.forEach((client) => {
+        if (client !== ws) {
+            client.send(data);
+        }
+    });
 };

@@ -1,13 +1,15 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-const messagesRouter = require('./src/server/routes/messages.routes')
+const express = require('express');
+const app = express();
+const WebSocket = require('ws');
+const MessagesController = require('./src/server/controllers/messages.controllers');
 
-var PORT = process.env.PORT || 8080;
-app.use(bodyParser.json());
+const PORT = process.env.PORT || 3030;
+const webSocket = new WebSocket.Server({ port: PORT });
 
-app.use('/messages', messagesRouter);
+webSocket.on('connection', (wsObj) => {
+    MessagesController.addClient(wsObj);
 
-app.listen(PORT, function() {
-    console.log('Server running on ' + PORT);
+    wsObj.on('message', (data) => {
+        MessagesController.sendMessage(wsObj, data);
+    });
 });
